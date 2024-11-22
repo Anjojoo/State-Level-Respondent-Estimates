@@ -9,6 +9,7 @@ abstract: "This study analyzes state-level respondent estimates using data from 
 format: pdf
 number-sections: true
 toc: true
+bibliography: references.bib
 ---
 
 ```{r}
@@ -24,7 +25,11 @@ library(tibble)
 
 # Introduction
 
-This paper utilizes the 2022 American Community Survey (ACS) data from IPUMS to explore educational attainment across states, focusing on respondents with doctoral degrees. The task involves determining the number of respondents with a doctoral degree in each state (STATEICP) and applying the ratio estimator approach of Laplace. Using California as a benchmark, where the total number of respondents across all education levels is known, the ratio of doctoral degree holders to total respondents is calculated. This ratio is then applied to other states to estimate their total respondent counts. The analysis includes a comparison of these estimates with actual state-level respondent numbers, highlighting differences and discussing potential causes for discrepancies.
+Understanding the distribution of educational attainment across states is essential for policymakers, educators, and researchers. This study leverages data from the 2022 American Community Survey (ACS), accessed via IPUMS, to investigate state-level educational patterns, specifically focusing on individuals whose highest degree is a doctorate. While previous studies often rely on direct population counts, this work introduces a statistical perspective by employing the ratio estimator approach, a technique designed to derive population estimates using auxiliary variables.
+
+The study aims to fill a gap in scalable population estimation by testing the applicability of a California-based ratio to other states. California, with its large population and diverse demographics, serves as the benchmark for calculating the proportion of doctoral degree holders to the total respondents. This ratio is then applied to other states to estimate their total number of respondents, allowing for an evaluation of how well such statistical models generalize across varied geographic and demographic contexts.
+
+Results show significant discrepancies between estimated and actual respondent counts in many states, highlighting limitations in assuming uniform ratios. Factors such as state-specific demographics, educational policies, and local economies contribute to these variations. By identifying these differences, the study underscores the importance of incorporating regional nuances into statistical models for more accurate population estimates.
 
 The remainder of this paper is structured as follows:
 
@@ -38,7 +43,7 @@ The remainder of this paper is structured as follows:
 
 We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the IPUMS, then clicked “Get Data”, then click “SELECT SAMPLE” and only select “2022 ACS”.  We choose state level data by selecting “HOUSEHOLD”, then choose “GEOGRAPHIC” and add “STATEICP” to cart. For individual level data, we directly search "EDUC" and add it to the cart. After that, we clicked “VIEW CART” , then  click  “CREATE DATA EXTRACT".  We modify the it to csv form. We clicked “SUBMIT EXTRACT" and download it. The data will not be uploaded to github due to its large size, and the prohibition of IPUMs.
 
-The analyses presented in this paper were conducted using R programming language [@citeR]. The `tidyverse` packages [@citetidyverse] were used in the process of data simulation, testing beforehand. After the original raw data was downloaded by using `tidyverse` package [@citetidyverse], data cleaning process was done by using `tidyverse` package [@citetidyverse]. We use `testthat` package [@citetest] to develop the test for structure and format of simulation and analysis data. Tables were constructed with `knitr` package [@citeknitr] and `tibble` package [@citetibble].
+The analyses presented in this paper were conducted using R programming language [@citeR]. The `tidyverse` packages [@citetidyverse] were used in the process of data simulation, testing beforehand. After the original raw data was downloaded by using `tidyverse` package [@citetidyverse], data cleaning process was done by using `tidyverse` package [@citetidyverse]. We also use `tidyverse` package [@citetidyverse] to develop the test for structure and format of simulation and analysis data. Tables were constructed with `knitr` package [@citeknitr] and `tibble` package [@citetibble].
 
 @tbl-1 shows the number of respondents that had a doctoral degree as their highest educational attainment (EDUC) in each state (STATEICP).
 
@@ -153,6 +158,7 @@ state_counts %>% select(-doctoral_count) %>%
 ## Reason of Difference
 
 As the primary assumption is that the ratio of doctoral degree holders to total respondents in California is similar to that in other states. If this is not the case, the ratio estimator can produce biased estimates. Differences in educational attainment by state due to factors like demographics, local policies, and economy may cause the actual ratios to differ, leading to discrepancies between the estimates and actual values.
+
 
 # References
 
