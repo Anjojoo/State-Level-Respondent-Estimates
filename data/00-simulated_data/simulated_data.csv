@@ -1,152 +1,501 @@
-division,state,party
-Division 1,Victoria,Liberal
-Division 2,New South Wales,Liberal
-Division 3,Tasmania,Liberal
-Division 4,New South Wales,Liberal
-Division 5,Queensland,Liberal
-Division 6,New South Wales,Labor
-Division 7,Victoria,Liberal
-Division 8,Western Australia,Labor
-Division 9,Western Australia,Greens
-Division 10,Queensland,Labor
-Division 11,Queensland,Labor
-Division 12,Northern Territory,Liberal
-Division 13,New South Wales,Labor
-Division 14,Western Australia,Labor
-Division 15,Western Australia,National
-Division 16,Victoria,Liberal
-Division 17,South Australia,Liberal
-Division 18,Victoria,Liberal
-Division 19,Western Australia,Labor
-Division 20,South Australia,Labor
-Division 21,New South Wales,Liberal
-Division 22,Queensland,Greens
-Division 23,New South Wales,Liberal
-Division 24,New South Wales,Liberal
-Division 25,Queensland,Labor
-Division 26,Victoria,National
-Division 27,New South Wales,Liberal
-Division 28,Queensland,Liberal
-Division 29,Tasmania,Liberal
-Division 30,South Australia,Liberal
-Division 31,New South Wales,Liberal
-Division 32,Victoria,Labor
-Division 33,Tasmania,Liberal
-Division 34,New South Wales,Liberal
-Division 35,Western Australia,Labor
-Division 36,New South Wales,Liberal
-Division 37,Tasmania,Greens
-Division 38,Tasmania,Labor
-Division 39,Victoria,Greens
-Division 40,South Australia,Labor
-Division 41,New South Wales,Other
-Division 42,New South Wales,Other
-Division 43,Tasmania,Labor
-Division 44,Tasmania,National
-Division 45,Queensland,Liberal
-Division 46,Australian Capital Territory,Other
-Division 47,Queensland,Labor
-Division 48,Queensland,Other
-Division 49,South Australia,Liberal
-Division 50,Victoria,National
-Division 51,South Australia,Liberal
-Division 52,Victoria,Labor
-Division 53,South Australia,National
-Division 54,Queensland,Liberal
-Division 55,Queensland,Labor
-Division 56,South Australia,Liberal
-Division 57,New South Wales,Other
-Division 58,Northern Territory,Liberal
-Division 59,New South Wales,Labor
-Division 60,Western Australia,Labor
-Division 61,New South Wales,Liberal
-Division 62,South Australia,Liberal
-Division 63,Queensland,Labor
-Division 64,Tasmania,Labor
-Division 65,South Australia,Labor
-Division 66,Victoria,Labor
-Division 67,Queensland,Liberal
-Division 68,Queensland,Liberal
-Division 69,Tasmania,Labor
-Division 70,South Australia,National
-Division 71,Australian Capital Territory,Labor
-Division 72,Western Australia,Labor
-Division 73,Queensland,National
-Division 74,Victoria,Labor
-Division 75,Western Australia,Labor
-Division 76,Tasmania,Labor
-Division 77,Queensland,Liberal
-Division 78,Western Australia,Liberal
-Division 79,Queensland,Labor
-Division 80,Queensland,Liberal
-Division 81,Victoria,Labor
-Division 82,New South Wales,Liberal
-Division 83,Victoria,Liberal
-Division 84,Queensland,National
-Division 85,Western Australia,Liberal
-Division 86,New South Wales,Labor
-Division 87,Queensland,Liberal
-Division 88,New South Wales,Liberal
-Division 89,Tasmania,Liberal
-Division 90,South Australia,Labor
-Division 91,Victoria,Liberal
-Division 92,New South Wales,Labor
-Division 93,Tasmania,Labor
-Division 94,South Australia,Labor
-Division 95,Victoria,Liberal
-Division 96,Victoria,Labor
-Division 97,Western Australia,Liberal
-Division 98,Queensland,Liberal
-Division 99,South Australia,Liberal
-Division 100,New South Wales,Labor
-Division 101,South Australia,Labor
-Division 102,New South Wales,Labor
-Division 103,Victoria,Labor
-Division 104,Victoria,Labor
-Division 105,South Australia,Other
-Division 106,Western Australia,Labor
-Division 107,Tasmania,Liberal
-Division 108,Victoria,Labor
-Division 109,Queensland,Liberal
-Division 110,Victoria,Labor
-Division 111,Australian Capital Territory,Labor
-Division 112,Victoria,Liberal
-Division 113,Victoria,Liberal
-Division 114,Victoria,Liberal
-Division 115,Tasmania,Labor
-Division 116,Victoria,Labor
-Division 117,New South Wales,Labor
-Division 118,Victoria,Labor
-Division 119,Victoria,Greens
-Division 120,Northern Territory,Labor
-Division 121,South Australia,Liberal
-Division 122,New South Wales,Liberal
-Division 123,New South Wales,Labor
-Division 124,New South Wales,Liberal
-Division 125,New South Wales,National
-Division 126,New South Wales,Labor
-Division 127,Queensland,Labor
-Division 128,New South Wales,Other
-Division 129,Queensland,Labor
-Division 130,Australian Capital Territory,Liberal
-Division 131,Tasmania,Greens
-Division 132,New South Wales,National
-Division 133,New South Wales,Labor
-Division 134,Northern Territory,Labor
-Division 135,South Australia,National
-Division 136,Victoria,Labor
-Division 137,Tasmania,National
-Division 138,South Australia,Liberal
-Division 139,New South Wales,Labor
-Division 140,Victoria,Other
-Division 141,Queensland,Greens
-Division 142,Victoria,National
-Division 143,Western Australia,Labor
-Division 144,Victoria,Labor
-Division 145,Queensland,Liberal
-Division 146,Tasmania,Liberal
-Division 147,South Australia,Liberal
-Division 148,Victoria,Labor
-Division 149,New South Wales,National
-Division 150,New South Wales,Labor
-Division 151,Victoria,Liberal
+STATEICP,EDUCD
+8,48
+63,69
+89,120
+92,82
+16,36
+100,22
+28,96
+83,91
+82,0
+2,92
+32,96
+18,16
+54,20
+34,24
+86,84
+66,100
+100,80
+81,58
+3,18
+100,79
+11,95
+39,101
+79,39
+65,116
+4,11
+1,43
+64,28
+83,95
+22,76
+44,30
+10,90
+90,108
+49,84
+78,7
+88,30
+42,65
+1,73
+95,95
+45,119
+0,51
+72,15
+47,52
+93,107
+87,1
+4,30
+21,83
+84,120
+72,9
+68,36
+62,113
+91,51
+69,12
+0,20
+5,96
+91,16
+100,30
+32,67
+55,90
+7,26
+74,31
+15,27
+76,4
+85,40
+91,20
+10,39
+62,109
+48,72
+98,115
+27,55
+17,18
+98,77
+52,51
+61,33
+62,94
+73,59
+36,30
+12,38
+74,19
+96,47
+10,98
+91,2
+7,48
+47,58
+24,37
+7,109
+83,62
+76,15
+2,6
+71,115
+51,37
+96,115
+67,103
+58,99
+26,93
+32,116
+80,94
+4,98
+60,54
+38,41
+51,55
+18,0
+69,1
+28,85
+51,47
+5,37
+85,116
+67,115
+91,25
+88,24
+48,110
+40,55
+74,34
+23,40
+87,51
+70,74
+94,29
+28,115
+29,5
+50,36
+71,6
+4,53
+46,36
+78,98
+9,39
+21,28
+70,27
+11,7
+36,47
+48,120
+16,107
+42,47
+80,83
+96,33
+61,60
+84,55
+40,104
+0,48
+21,89
+87,120
+15,95
+91,51
+47,68
+22,114
+28,16
+80,110
+89,108
+70,89
+11,101
+45,8
+26,18
+6,112
+88,105
+63,94
+60,88
+91,39
+71,28
+91,84
+85,22
+17,10
+66,26
+52,99
+96,15
+1,82
+100,6
+28,42
+33,82
+37,106
+2,14
+50,115
+61,46
+47,0
+85,41
+85,43
+79,89
+18,120
+7,91
+77,14
+70,35
+63,62
+5,68
+64,47
+98,35
+82,109
+19,112
+34,57
+10,1
+95,110
+60,34
+34,100
+69,66
+25,11
+52,101
+12,36
+40,98
+52,8
+99,88
+39,110
+90,92
+73,88
+81,64
+95,52
+91,90
+58,47
+23,23
+49,64
+66,13
+24,1
+59,116
+38,76
+94,68
+2,100
+54,18
+19,47
+54,44
+55,73
+41,37
+76,76
+57,55
+85,99
+10,56
+8,115
+32,112
+54,97
+50,71
+72,69
+3,108
+95,118
+8,5
+84,29
+8,51
+39,16
+1,30
+54,94
+64,8
+26,93
+18,52
+29,79
+74,77
+41,56
+11,37
+38,95
+24,32
+17,0
+31,69
+24,20
+77,1
+97,0
+76,101
+49,60
+64,62
+77,69
+32,26
+15,41
+37,22
+22,109
+23,27
+98,1
+24,60
+92,63
+78,109
+57,8
+77,83
+38,54
+68,76
+99,83
+37,16
+70,21
+50,77
+27,93
+84,54
+40,39
+61,30
+9,32
+14,26
+54,41
+50,106
+59,41
+7,34
+68,74
+86,79
+70,35
+62,14
+75,14
+45,60
+77,90
+91,77
+17,27
+15,85
+100,47
+54,3
+4,28
+82,35
+61,99
+74,15
+53,54
+42,25
+73,22
+98,43
+67,63
+56,13
+15,94
+29,29
+1,83
+49,105
+5,111
+82,31
+90,83
+18,51
+53,35
+48,10
+80,6
+85,3
+64,44
+62,117
+90,48
+8,67
+31,34
+79,41
+70,71
+39,32
+98,5
+90,114
+57,31
+35,48
+62,64
+66,51
+27,39
+76,60
+64,101
+56,19
+19,111
+37,96
+82,54
+16,116
+96,115
+87,78
+60,69
+44,102
+10,57
+14,25
+56,10
+75,33
+36,35
+84,24
+92,101
+97,21
+62,24
+78,83
+93,37
+84,120
+100,35
+76,2
+3,100
+92,56
+59,6
+23,4
+9,65
+86,29
+22,0
+97,1
+11,76
+17,74
+84,33
+88,112
+40,44
+78,87
+70,2
+87,112
+48,94
+90,79
+17,109
+67,25
+35,55
+84,74
+94,111
+33,64
+12,117
+29,50
+4,19
+17,88
+97,30
+43,41
+46,3
+4,70
+89,0
+61,46
+7,25
+48,19
+51,120
+36,45
+45,91
+72,60
+92,73
+23,33
+85,9
+4,100
+63,62
+98,69
+1,50
+74,55
+5,83
+88,37
+24,34
+33,105
+55,117
+73,62
+60,7
+33,66
+19,26
+20,95
+10,112
+7,94
+81,16
+46,111
+12,101
+93,54
+81,101
+50,115
+81,98
+40,7
+39,72
+56,76
+5,33
+64,79
+4,106
+90,10
+14,91
+56,48
+16,117
+93,93
+7,29
+37,111
+12,21
+56,8
+46,10
+59,42
+96,97
+100,16
+61,0
+37,8
+100,87
+17,75
+64,58
+14,4
+47,52
+63,5
+72,102
+86,17
+10,48
+86,33
+29,41
+4,9
+26,1
+29,47
+85,61
+58,32
+13,12
+91,80
+93,54
+42,99
+96,109
+57,8
+12,63
+78,7
+33,86
+75,36
+49,70
+85,17
+27,90
+60,81
+5,68
+20,59
+42,80
+81,67
+8,5
+3,11
+50,23
+86,101
+57,77
+59,22
+79,2
+29,70
+56,99
+36,109
+91,103
+88,93
+87,120
+73,46
+82,102
+1,59
+75,30
+54,116
+17,54
+100,31
+19,97
+5,115
+6,59
+57,7
+76,95
+58,49
