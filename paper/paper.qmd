@@ -5,7 +5,7 @@ author:
 thanks: "Code and data are available at: https://github.com/Anjojoo/State-Level-Respondent-Estimates."
 date: today
 date-format: long
-abstract: ""
+abstract: "This study analyzes state-level respondent estimates using data from the 2022 American Community Survey (ACS) accessed via IPUMS, and focuses on individuals with doctoral degrees and employs the ratio estimator approach to predict total respondents in each state, using California as a reference point. The results reveal discrepancies between estimates and actual figures, highlighting the limitations of assuming uniform ratios across states. These differences are attributed to variations in demographics, educational policies, and economic conditions. The analysis underscores the utility of statistical methods like ratio estimators for scalable estimates while emphasizing the importance of accounting for regional variations in such analyses."
 format: pdf
 number-sections: true
 toc: true
@@ -57,7 +57,7 @@ doctoral_data <- data %>%
   summarize(doctoral_count = n())
 
 doctoral_data %>%
-  kable(format = "simple", col.names = c('STATEICP', 'doctoral_count'))
+  kable(format = "simple", col.names = c('State', 'Doctoral Counts'))
 ```
 
 ## Measurement {#sec-data-measure}
@@ -115,7 +115,7 @@ estimated_data <- doctoral_data %>%
   mutate(estimated_total_respondents = round(doctoral_count / california_ratio, 1))
 
 estimated_data %>% select(-doctoral_count) %>%
-  kable(format = "simple", col.names = c('STATEICP',  'estimated_total_respondents'))
+  kable(format = "simple", col.names = c('State',  'Estimated Respondents'))
 ```
 
 
@@ -144,7 +144,8 @@ state_counts <- state_counts %>%
   mutate(difference = total_count_respondents - estimated_total_respondents)
 
 state_counts %>% select(-doctoral_count) %>%
-  kable(format = "simple", col.names = c('STATEICP', 'estimated_total_respondents', 'total_count_respondents', 'difference'))
+  kable(format = "simple", col.names = c('State', "Estimated Respondents", 
+                                         "Actual Respondents", "Difference"))
 ```
 
 
