@@ -28,7 +28,7 @@ This paper utilizes the 2022 American Community Survey (ACS) data from IPUMS to 
 
 The remainder of this paper is structured as follows:
 
-@sec-data introduces the data obtaining process (@sec-data-obtaining), measurement (@sec-data-measure), data cleaning process (@sec-data-cleaning), as well as explanations, descriptions, table and graph summaries of outcome (@sec-data-outcome) and predictor variables (@sec-data-predictor) of the study. Then, @sec-result presents the prediction outcome and results by plots, and @sec-discussion discusses the results and models in a broader context. 
+@sec-data introduces the data obtaining process (@sec-data-obtaining), measurement (@sec-data-measure), as well as an overview of the ratio estimators approach (@sec-data-approach). Then, @sec-result presents the estimates and the actual number of respondents, and @sec-dis discusses the results, and reasons of difference between the estimated result and the actual value. 
 
 
 
@@ -62,8 +62,13 @@ doctoral_data %>%
 
 ## Measurement {#sec-data-measure}
 
+This paper uses IPUMS to access 2022 American Community Survey (ACS), focusing on the real-world phenomenon of educational attainment — specifically, individuals obtaining a doctoral degree. As society has been paying arising attention to a specific person’s education progress, we find this widespread social phenomenon a meaningful topic to make investigations on.
+We used the raw dataset from IPUMS USA, which provides a large database containing data collected from surveys or census activities by U.S. Census and American Community Survey from 1850 to the present. [@ipums-us] The raw data was downloaded from the website and stored in a structured table with columns of STATEICP (indicating the state information of each respondent), EDUC (indicating highest educational attainment of each respondent, i.e. a doctoral degree, which is the topic we have been working on) and other columns presenting various pieces of information gathered from the respondent.
+Then, we cleaned the raw dataset, removing incomplete and unnecessary columns and rows to make our analysis clearer. In particular, we selected the EDUC column and STATEICP column to keep valuable information and processed the data to show the number of respondents in each state that had a doctoral degree as their highest educational attainment.
+Steps went on to the estimation approach, where we used Laplace ratio estimator to estimate the total number of respondents in each state, given the number of respondents (391,171) in California. This is a statistical method to obtain counts of respondents without acknowledging every piece of information, which is convenient and easy for computing following statistical analysis.
+Although the method could be helpful, it may also lead to biases. This is because the Laplace estimating method is based on the assumption that the proportion of doctoral degree holders is similar across states, which could not be held in real-life situations. Therefore, the differences between real-world data (actual survey responses) and statistical estimates as inferred from California's data was calculated to investigate whether the ratio provides a good estimate and to consider the underlying reason explaining the differences.
 
-## Overview of the ratio estimators approach
+## Overview of the ratio estimators approach {#sec-data-approach}
 
 The ratio estimator is a method used to improve the accuracy of estimates for a population parameter when there is an auxiliary variable related to the variable of interest. In this case, the objective is to estimate the total number of respondents in each state in the 2022 ACS dataset, given the known number of respondents with doctoral degrees in each state and the California ratio.
 
@@ -79,7 +84,7 @@ For each state, the estimated total number of respondents is calculated by apply
 $$\text{Estimated Total Respondents in State}=\frac{\text{Number of doctoral respondents in state}}{\text{Ratio}}$$
 
 
-# Results
+# Results {#sec-result}
 
 ## Estimates and the actual number of respondents
 
@@ -143,9 +148,11 @@ state_counts %>% select(-doctoral_count) %>%
 ```
 
 
-# Discussion
+# Discussion {#sec-dis}
 ## Reason of Difference
 
 As the primary assumption is that the ratio of doctoral degree holders to total respondents in California is similar to that in other states. If this is not the case, the ratio estimator can produce biased estimates. Differences in educational attainment by state due to factors like demographics, local policies, and economy may cause the actual ratios to differ, leading to discrepancies between the estimates and actual values.
+
+# References
 
 
