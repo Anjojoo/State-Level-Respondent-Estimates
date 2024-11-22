@@ -1,0 +1,147 @@
+---
+title: "Analyzing State-Level Respondent Estimates Using Ratio Estimators: A Case Study with 2022 ACS Data"
+author: 
+  - Yunkai Gu, Anqi Xu, Yitong Wang
+thanks: "Code and data are available at: https://github.com/Anjojoo/State-Level-Respondent-Estimates."
+date: today
+date-format: long
+abstract: ""
+format: pdf
+number-sections: true
+toc: true
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(tibble)
+```
+
+# Introduction
+
+This paper utilizes the 2022 American Community Survey (ACS) data from IPUMS to explore educational attainment across states, focusing on respondents with doctoral degrees. The task involves determining the number of respondents with a doctoral degree in each state (STATEICP) and applying the ratio estimator approach of Laplace. Using California as a benchmark, where the total number of respondents across all education levels is known, the ratio of doctoral degree holders to total respondents is calculated. This ratio is then applied to other states to estimate their total respondent counts. The analysis includes a comparison of these estimates with actual state-level respondent numbers, highlighting differences and discussing potential causes for discrepancies.
+
+The remainder of this paper is structured as follows:
+
+@sec-data introduces the data obtaining process (@sec-data-obtaining), measurement (@sec-data-measure), data cleaning process (@sec-data-cleaning), as well as explanations, descriptions, table and graph summaries of outcome (@sec-data-outcome) and predictor variables (@sec-data-predictor) of the study. Then, @sec-result presents the prediction outcome and results by plots, and @sec-discussion discusses the results and models in a broader context. 
+
+
+
+# Data {#sec-data}
+
+## Data obtaining {#sec-data-obtaining}
+
+We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the IPUMS, then clicked “Get Data”, then click “SELECT SAMPLE” and only select “2022 ACS”.  We choose state level data by selecting “HOUSEHOLD”, then choose “GEOGRAPHIC” and add “STATEICP” to cart. For individual level data, we directly search "EDUC" and add it to the cart. After that, we clicked “VIEW CART” , then  click  “CREATE DATA EXTRACT".  We modify the it to csv form. We clicked “SUBMIT EXTRACT" and download it.
+
+@tbl-1 shows the number of respondents that had a doctoral degree as their highest educational attainment (EDUC) in each state (STATEICP).
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-1
+#| tbl-cap: "Respondents with a doctoral degree as their highest educational attainment in each state"
+
+data <- read.csv(file = here::here("data/01-raw_data/usa_00001.csv"))
+
+doctoral_data <- data %>% 
+  filter(EDUCD == 116) %>% 
+  group_by(STATEICP) %>%
+  summarize(doctoral_count = n())
+
+doctoral_data %>%
+  kable(format = "simple", col.names = c('STATEICP', 'doctoral_count'))
+```
+
+## Measurement {#sec-data-measure}
+
+
+# Overview of the ratio estimators approach
+
+The ratio estimator is a method used to improve the accuracy of estimates for a population parameter when there is an auxiliary variable related to the variable of interest. In this case, the objective is to estimate the total number of respondents in each state in the 2022 ACS dataset, given the known number of respondents with doctoral degrees in each state and the California ratio.
+
+With the given total number of respondents in California across all education levels and the number of respondents in California who have a doctoral degree which is available in the data, we can calculate the ratio by the following:
+
+$$
+Ratio=\frac{\text{Total number of respondents}}{\text{Number of doctoral respondents}}
+$$
+Once the ratio is known for California, it is assumed that this ratio is similar across other states. This is the core assumption of the ratio estimator: that the proportion of doctoral degree holders to total respondents is similar across states.
+
+For each state, the estimated total number of respondents is calculated by applying the ratio derived from California:
+
+$$\text{Estimated Total Respondents in State}=\frac{\text{Number of doctoral respondents in state}}{\text{Ratio}}$$
+
+
+# Estimates and the actual number of respondents
+
+
+@tbl-2 shows the number of estimated total respondents in each state by estimators approach of Laplace.
+
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-2
+#| tbl-cap: "Number of Estimated Total Respondents in Each State"
+
+
+# Extract the number of doctoral degree holders in California
+california_doctoral <- doctoral_data %>% 
+  filter(STATEICP == 71) %>% 
+  pull(doctoral_count)
+
+california_total_respondents <- 391171
+
+# Calculate the ratio of doctoral degrees to total respondents in California
+california_ratio <- california_doctoral / california_total_respondents
+
+# Apply the ratio to estimate total number of respondents in each state
+estimated_data <- doctoral_data %>%
+  mutate(estimated_total_respondents = doctoral_count / california_ratio)
+
+estimated_data %>% select(-doctoral_count) %>%
+  kable(format = "simple", col.names = c('STATEICP',  'estimated_total_respondents'))
+```
+
+
+@tbl-3 shows the actual respondent and the difference between estimation and the actual number of respondents in each state.
+
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-3
+#| tbl-cap: "Number of Actual Total Respondents and the Difference in Each State"
+
+
+#To get the total number of respondents per state
+state_totals <- data %>%
+  group_by(STATEICP) %>%
+  summarize(total_count_respondents = n())
+
+
+# Join datasets
+state_counts <- estimated_data %>%
+  inner_join(state_totals, by = "STATEICP")
+
+state_counts <- state_counts %>%
+  mutate(difference = total_count_respondents - estimated_total_respondents)
+
+state_counts %>% select(-doctoral_count) %>%
+  kable(format = "simple", col.names = c('STATEICP', 'estimated_total_respondents', 'total_count_respondents', 'difference'))
+```
+
+
+# Discussion
+## Reason of Difference
+
+As the primary assumption is that the ratio of doctoral degree holders to total respondents in California is similar to that in other states. If this is not the case, the ratio estimator can produce biased estimates. Differences in educational attainment by state due to factors like demographics, local policies, and economy may cause the actual ratios to differ, leading to discrepancies between the estimates and actual values.
+
+
