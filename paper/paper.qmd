@@ -38,6 +38,8 @@ The remainder of this paper is structured as follows:
 
 We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the IPUMS, then clicked “Get Data”, then click “SELECT SAMPLE” and only select “2022 ACS”.  We choose state level data by selecting “HOUSEHOLD”, then choose “GEOGRAPHIC” and add “STATEICP” to cart. For individual level data, we directly search "EDUC" and add it to the cart. After that, we clicked “VIEW CART” , then  click  “CREATE DATA EXTRACT".  We modify the it to csv form. We clicked “SUBMIT EXTRACT" and download it.
 
+The analyses presented in this paper were conducted using R programming language [@citeR]. The `tidyverse` packages [@citetidyverse] were used in the process of data simulation, testing beforehand. After the original raw data was downloaded by using `tidyverse` package [@citetidyverse], data cleaning process was done by using `tidyverse` package [@citetidyverse]. We use `testthat` package [@citetest] to develop the test for structure and format of simulation and analysis data. Tables were constructed with `knitr` package [@citeknitr] and `tibble` package [@citetibble].
+
 @tbl-1 shows the number of respondents that had a doctoral degree as their highest educational attainment (EDUC) in each state (STATEICP).
 
 ```{r}
@@ -61,7 +63,7 @@ doctoral_data %>%
 ## Measurement {#sec-data-measure}
 
 
-# Overview of the ratio estimators approach
+## Overview of the ratio estimators approach
 
 The ratio estimator is a method used to improve the accuracy of estimates for a population parameter when there is an auxiliary variable related to the variable of interest. In this case, the objective is to estimate the total number of respondents in each state in the 2022 ACS dataset, given the known number of respondents with doctoral degrees in each state and the California ratio.
 
@@ -77,7 +79,9 @@ For each state, the estimated total number of respondents is calculated by apply
 $$\text{Estimated Total Respondents in State}=\frac{\text{Number of doctoral respondents in state}}{\text{Ratio}}$$
 
 
-# Estimates and the actual number of respondents
+# Results
+
+## Estimates and the actual number of respondents
 
 
 @tbl-2 shows the number of estimated total respondents in each state by estimators approach of Laplace.
