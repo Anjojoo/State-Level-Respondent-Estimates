@@ -36,7 +36,7 @@ The remainder of this paper is structured as follows:
 
 ## Data obtaining {#sec-data-obtaining}
 
-We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the IPUMS, then clicked “Get Data”, then click “SELECT SAMPLE” and only select “2022 ACS”.  We choose state level data by selecting “HOUSEHOLD”, then choose “GEOGRAPHIC” and add “STATEICP” to cart. For individual level data, we directly search "EDUC" and add it to the cart. After that, we clicked “VIEW CART” , then  click  “CREATE DATA EXTRACT".  We modify the it to csv form. We clicked “SUBMIT EXTRACT" and download it.
+We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the IPUMS, then clicked “Get Data”, then click “SELECT SAMPLE” and only select “2022 ACS”.  We choose state level data by selecting “HOUSEHOLD”, then choose “GEOGRAPHIC” and add “STATEICP” to cart. For individual level data, we directly search "EDUC" and add it to the cart. After that, we clicked “VIEW CART” , then  click  “CREATE DATA EXTRACT".  We modify the it to csv form. We clicked “SUBMIT EXTRACT" and download it. The data will not be uploaded to github due to its large size, and the prohibition of IPUMs.
 
 The analyses presented in this paper were conducted using R programming language [@citeR]. The `tidyverse` packages [@citetidyverse] were used in the process of data simulation, testing beforehand. After the original raw data was downloaded by using `tidyverse` package [@citetidyverse], data cleaning process was done by using `tidyverse` package [@citetidyverse]. We use `testthat` package [@citetest] to develop the test for structure and format of simulation and analysis data. Tables were constructed with `knitr` package [@citeknitr] and `tibble` package [@citetibble].
 
@@ -107,7 +107,7 @@ california_ratio <- california_doctoral / california_total_respondents
 
 # Apply the ratio to estimate total number of respondents in each state
 estimated_data <- doctoral_data %>%
-  mutate(estimated_total_respondents = doctoral_count / california_ratio)
+  mutate(estimated_total_respondents = round(doctoral_count / california_ratio, 1))
 
 estimated_data %>% select(-doctoral_count) %>%
   kable(format = "simple", col.names = c('STATEICP',  'estimated_total_respondents'))
