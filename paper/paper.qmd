@@ -49,7 +49,7 @@ The analyses presented in this paper were conducted using R programming language
 #| label: tbl-1
 #| tbl-cap: "Respondents with a doctoral degree as their highest educational attainment in each state"
 
-data <- read.csv(file = here::here("data/01-raw_data/usa_00001.csv"))
+data <- read.csv(file = here::here("data/02-analysis_data/analysis_data.csv"))
 
 doctoral_data <- data %>% 
   filter(EDUCD == 116) %>% 
