@@ -33,7 +33,7 @@ Results show significant discrepancies between estimated and actual respondent c
 
 The remainder of this paper is structured as follows:
 
-@sec-data introduces the data obtaining process (@sec-data-obtaining), measurement (@sec-data-measure), as well as an overview of the ratio estimators approach (@sec-data-approach). Then, @sec-result presents the estimates and the actual number of respondents, and @sec-dis discusses the results, and reasons of difference between the estimated result and the actual value. 
+@sec-data introduces the data obtaining process (@sec-data-obtaining), measurement (@sec-data-measure), as well as an overview of the ratio estimators approach (@sec-data-approach). Then, @sec-result presents the estimates and the actual number of respondents, and further analysis on summary statistics, and @sec-dis discusses the results, and reasons of difference between the estimated result and the actual value. 
 
 
 
@@ -45,7 +45,7 @@ We gather the data from IPUMS USA site, firstly we select “IPUMS USA” on the
 
 The analyses presented in this paper were conducted using R programming language [@citeR]. The `tidyverse` packages [@citetidyverse] were used in the process of data simulation, testing beforehand. After the original raw data was downloaded by using `tidyverse` package [@citetidyverse], data cleaning process was done by using `tidyverse` package [@citetidyverse]. We also use `tidyverse` package [@citetidyverse] to develop the test for structure and format of simulation and analysis data. Tables were constructed with `knitr` package [@citeknitr] and `tibble` package [@citetibble].
 
-@tbl-1 shows the number of respondents that had a doctoral degree as their highest educational attainment (EDUC) in each state (STATEICP).
+@tbl-1 shows the number of respondents that had a doctoral degree as their highest educational attainment in each state.
 
 ```{r}
 #| warning: false
@@ -153,11 +153,126 @@ state_counts %>% select(-doctoral_count) %>%
                                          "Actual Respondents", "Difference"))
 ```
 
+## Summary Statistics
+
+The following three tables present the summary statistics of estimated number of respondents, actual number of respondents and differences between two counts (actual number - estimated number). Specifically, @tbl-4 is for estimated total respondents, @tbl-5 is for actual total respondents, and @tbl-6 is for the difference between two number.
+
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-4
+#| tbl-cap: "Summary Statistics of Estimated Total Respondents"
+
+# Summary statistics for the estimated column
+summary_stats_1 <- state_counts %>%
+  summarize(
+    estimated_total_respondents_mean = mean(estimated_total_respondents, na.rm = TRUE),
+    estimated_total_respondents_sd = sd(estimated_total_respondents, na.rm = TRUE),
+    estimated_total_respondents_min = min(estimated_total_respondents, na.rm = TRUE),
+    estimated_total_respondents_max = max(estimated_total_respondents, na.rm = TRUE)
+  )
+
+# Convert the summary stats to a tibble for proper column naming
+summary_stats_tibble_1 <- as_tibble(summary_stats_1)
+
+# Rename columns for clearer labeling in kable
+colnames(summary_stats_tibble_1) <- c(
+  'Estimated Mean', 'Estimated SD', 'Estimated Min', 'Estimated Max'
+)
+
+# Use kable to display the summary statistics table
+summary_stats_tibble_1 %>%
+  kable(format = "simple")
+```
+
+
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-5
+#| tbl-cap: "Summary Statistics of Actual Total Respondents"
+
+# Summary statistics for actual column
+summary_stats_2 <- state_counts %>%
+  summarize(
+    total_count_respondents_mean = mean(total_count_respondents, na.rm = TRUE),
+    total_count_respondents_sd = sd(total_count_respondents, na.rm = TRUE),
+    total_count_respondents_min = min(total_count_respondents, na.rm = TRUE),
+    total_count_respondents_max = max(total_count_respondents, na.rm = TRUE)
+  )
+
+# Convert the summary stats to a tibble for proper column naming
+summary_stats_tibble_2 <- as_tibble(summary_stats_2)
+
+# Rename columns for clearer labeling in kable
+colnames(summary_stats_tibble_2) <- c(
+  'Actual Mean', 'Actual SD', 'Actual Min', 'Actual Max'
+)
+
+# Use kable to display the summary statistics table
+summary_stats_tibble_2 %>%
+  kable(format = "simple")
+```
+
+
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-6
+#| tbl-cap: "Summary Statistics of Difference (Actual Minus Estimated Counts)"
+
+# Summary statistics for the difference column
+summary_stats_3 <- state_counts %>%
+  summarize(
+    difference_mean = mean(difference, na.rm = TRUE),
+    difference_sd = sd(difference, na.rm = TRUE),
+    difference_min = min(difference, na.rm = TRUE),
+    difference_max = max(difference, na.rm = TRUE)
+  )
+
+# Convert the summary stats to a tibble for proper column naming
+summary_stats_tibble_3 <- as_tibble(summary_stats_3)
+
+# Rename columns for clearer labeling in kable
+colnames(summary_stats_tibble_3) <- c(
+  'Difference Mean', 'Difference SD', 'Difference Min', 'Difference Max'
+)
+
+# Use kable to display the summary statistics table
+summary_stats_tibble_3 %>%
+  kable(format = "simple")
+```
+
+
+@tbl-4 and @tbl-5 shows that on average, the actual total respondents (shown by @tbl-5) are higher than the estimated total respondents (shown by @tbl-4). 
+
+Specifically, the estimated mean (53359.66) is much smaller than the actual mean (66144.67). This noticeable gap between two numbers suggest that the estimator used may lead to underestimation of the number of total respondents in most states.
+
+The difference mean in @tbl-6 is 12785.01, which also implies that there's underestimation on average. The value means that on average, the actual number of respondents is greater than the estimated value by around 12785 people.
+
+@tbl-6 also reveals large range of differences between actual and estimated counts of respondents. The minimum difference is -51263.02, suggesting that in one of the most extreme cases, the actual number is much lower than the estimated one. This may caused by specific characteristics for some states, which led to the violation of the assumption of the Laplace ratio estimator (which assumes that the proportion of doctoral degree holders is similar across states).
+
+On the other hand, the maximum difference is 94370, indicating that in another extreme case, the actual number is much higher than the estimated one. The huge gap between maximum and minimum value of difference reveals the fact that the estimator might not generalize well to all the states across the country, and that the estimating process may not be appropriate in some cases.
+
 
 # Discussion {#sec-dis}
 ## Reason of Difference
 
-As the primary assumption is that the ratio of doctoral degree holders to total respondents in California is similar to that in other states. If this is not the case, the ratio estimator can produce biased estimates. Differences in educational attainment by state due to factors like demographics, local policies, and economy may cause the actual ratios to differ, leading to discrepancies between the estimates and actual values.
+The primary assumption for this estimation model to work is that the ratio of doctoral degree holders to total respondents in California is similar to that in other states. If this is not the case, the ratio estimator could produce biased estimates, overestimating or underestimating the number of respondents in other states, depending on the state’s specific characteristics.
+
+Though the assumption makes our analysis and estimating process become convenient, this is a non-realistic assumption for real-life situations. There exist various demographic factors which would lead to the failure of the assumption. 
+
+For instance, rural states may have lower educational attainment due to the lack of universities, schools and research institutions, compared to the states with more urban regions. 
+
+Some states may have cultural factors or socioeconomic characteristics that make the educational attainment situation become different from that of California. 
+
+Other factors like local policies may also cause the actual ratios to differ, leading to discrepancies between the estimates and actual values.
 
 
 # References
